@@ -3,6 +3,7 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 
@@ -20,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         String name = "Xianda Long";
         int price = calculatePrice();
-        String priceMessage = createOrderSummary(name, quantity, price);
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whippedCreamCheckBox);
+        boolean addWhippedCream = whippedCreamCheckBox.isChecked();
+        String priceMessage = createOrderSummary(name, addWhippedCream, quantity, price);
         displayMessage(priceMessage);
     }
 
@@ -49,23 +52,29 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
 
-    private int calculatePrice(int number) {
-        return number * 5;
-    }
-
-    private int calculatePrice(int number, int unitPrice) {
-        return number * unitPrice;
-    }
+//    private int calculatePrice(int number) {
+//        return number * 5;
+//    }
+//
+//    private int calculatePrice(int number, int unitPrice) {
+//        return number * unitPrice;
+//    }
 
     private int calculatePrice() {
         return quantity * 5;
     }
 
-    private String createOrderSummary(String name, int quantity, int price) {
-        return "Name: " + name + "\nQuantity: " + quantity + "\nTotal: $" + price + "\nThank you!";
+    private String createOrderSummary(String name, boolean addWhippedCream, int quantity, int price) {
+        String summary = "";
+        summary += "Name: " + name;
+        summary += "\nAdd whipped cream? " + addWhippedCream;
+        summary += "\nQuantity: " + quantity;
+        summary += "\nTotal: $" + price;
+        summary += "\nThank you!";
+        return summary;
     }
 }
