@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        String name = "Xianda Long";
         int price = calculatePrice();
-        String priceMessage = "Total: $" + price;
-        priceMessage += "\nThank you!";
+        String priceMessage = createOrderSummary(name, quantity, price);
         displayMessage(priceMessage);
     }
 
@@ -63,5 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
     private int calculatePrice() {
         return quantity * 5;
+    }
+
+    private String createOrderSummary(String name, int quantity, int price) {
+        return "Name: " + name + "\nQuantity: " + quantity + "\nTotal: $" + price + "\nThank you!";
     }
 }
